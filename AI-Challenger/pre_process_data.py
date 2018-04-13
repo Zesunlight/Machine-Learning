@@ -17,10 +17,10 @@ train_json_path = './scene_train_annotations.json'
 train_label = convert_json(train_json_path)
 X_train_orig, Y_train_orig = dataset(train_image_dir, train_label, image_height, image_width)
 X_train = X_train_orig / 255.
-numpy.save('X_train.npy', X_train)
+np.save('X_train.npy', X_train)
 num_train_examples = X_train.shape[0]
 Y_train = np.eye(num_classes)[Y_train_orig.reshape(-1)]    #convert to one hot
-numpy.save('Y_train.npy', Y_train)
+np.save('Y_train.npy', Y_train)
 print('pre-treated train set')
 
 #pre-treated test set
