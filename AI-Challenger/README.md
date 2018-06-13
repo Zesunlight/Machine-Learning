@@ -6,3 +6,5 @@
 - 主要参考 deepLearning.ai 课程的模式
 
 - 模仿 VGG16 的网络
+
+- keras 预训练模型
