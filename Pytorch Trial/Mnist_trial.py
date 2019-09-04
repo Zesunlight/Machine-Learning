@@ -3,7 +3,7 @@ import torch.nn as nn
 import torchvision as tv
 
 
-def load_data(batch_size=16):
+def load_data(batch_size=32):
     transform = tv.transforms.Compose([tv.transforms.ToTensor()])
 
     train_set = tv.datasets.MNIST(root=r'A:\DataSet\Mnist', transform=transform, train=True)
