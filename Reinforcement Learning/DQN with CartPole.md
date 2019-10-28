@@ -29,7 +29,7 @@ Nature DQN做了一个改进，就是增加Target Q网络。也就是我们在�
 
 ## 代码
 
-![1565700671849](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/pictures/DQN with experience replay.png)
+![1565700671849](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/pictures/DQN-with-experience-replay.png)
 
 （[源码](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/DQN with CartPole.py)）
 
@@ -181,7 +181,7 @@ if __name__ == '__main__':
 - **Prioritized Experience Replay** 
 - **Dueling Network Architectures for Deep Reinforcement** 
 
-![Improvements](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/pictures/Improvements since Nature DQN.jpg)
+![Improvements](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/pictures/Improvements-since-Nature-DQN.jpg)
 
 - Double DQN：目的是减少因为max Q值计算带来的计算偏差，或者称为过度估计（over estimation）问题，用当前的Q网络来选择动作，用目标Q网络来计算目标Q。
 - Prioritised replay：也就是优先经验的意思。优先级采用目标Q值与当前Q值的差值来表示。优先级高，那么采样的概率就高。
