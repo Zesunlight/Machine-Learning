@@ -29,7 +29,7 @@ Nature DQN做了一个改进，就是增加Target Q网络。也就是我们在�
 
 ## 代码
 
-![1565700671849](pictures/DQN-with-experience-replay.png)
+![](pictures/DQN-with-experience-replay.png)
 
 （[源码](DQN_with_CartPole.py)）
 
