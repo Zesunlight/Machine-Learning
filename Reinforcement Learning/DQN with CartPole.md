@@ -31,7 +31,7 @@ Nature DQN做了一个改进，就是增加Target Q网络。也就是我们在�
 
 ![1565700671849](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/pictures/DQN-with-experience-replay.png)
 
-（[源码](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/DQN with CartPole.py)）
+（[源码](https://github.com/Zesunlight/Machine-Learning/tree/master/Reinforcement%20Learning/DQN_with_CartPole.py)）
 
 ```python
 import os
