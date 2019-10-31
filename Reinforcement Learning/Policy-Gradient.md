@@ -44,7 +44,7 @@
   $$
 
   $$
-  \begin{aligned} & E\left[\nabla_{\theta} \log P(\tau ; \theta) b\right] \\=& \sum_{\tau} P(\tau ; \theta) \nabla_{\theta} \log P(\tau ; \theta) b \\=& \sum_{\tau} P(\tau ; \theta) \frac{\nabla_{\theta} P(\tau ; \theta) b}{P(\tau ; \theta)} \\=& \sum_{\tau} \nabla_{\theta} P(\tau ; \theta) b \\=& \nabla_{\theta}\left(\sum_{\tau} P(\tau ; \theta) b\right) \\=&\nabla_{\theta} b \\=& 0 \end{aligned}
+  \begin{aligned} & E\left[\nabla_{\theta} \log P(\tau ; \theta) b\right] \\=& \sum_{\tau} P(\tau ; \theta) \nabla_{\theta} \log P(\tau ; \theta) b \\&= \sum_{\tau} P(\tau ; \theta) \frac{\nabla_{\theta} P(\tau ; \theta) b}{P(\tau ; \theta)} \\&= \sum_{\tau} \nabla_{\theta} P(\tau ; \theta) b \\&= \nabla_{\theta}\left(\sum_{\tau} P(\tau ; \theta) b\right) \\=&\nabla_{\theta} b \\=& 0 \end{aligned}
   $$
 
 - 当前的动作与过去的回报实际上是没有关系的，可以修改回报函数（两种方式）
@@ -63,10 +63,9 @@
 ## 策略目标函数
 
 $$
-\begin{aligned} 
   J_{1}(\theta) &= V_{\pi _{\theta}}(s_1) = \mathbb E_{\pi _{\theta}}[G_1] \\
   J_{a v V}(\theta) &=\sum_{s} d^{\pi_{\theta}}(s) V_{\pi_{\theta}}(s) \\ 
-  J_{a v R}(\theta) &=\sum_{s} d^{\pi_{\theta}}(s) \sum_{a} \pi_{\theta}(s, a) R_{s}^{a} \end{aligned}
+  J_{a v R}(\theta) &=\sum_{s} d^{\pi_{\theta}}(s) \sum_{a} \pi_{\theta}(s, a) R_{s}^{a}
 $$
 
 - $d^{\pi _{\theta}}(s)$ is stationary distribution of Markov chain for $\pi _\theta$ （静态分布）
