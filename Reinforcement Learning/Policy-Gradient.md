@@ -14,7 +14,7 @@
 
 ## 目标函数（基于一个序列）
 
-- 用![[公式]](https://www.zhihu.com/equation?tex=%5Ctau)表示一组状态-行为序列![[公式]](https://www.zhihu.com/equation?tex=%5C%5B+s_0%2Cu_0%2C%5Ccdots+%2Cs_H%2Cu_H+%5C%5D), 符号![[公式]](https://www.zhihu.com/equation?tex=%5C%5B+R%5Cleft%28%5Ctau%5Cright%29%3D%5Csum_%7Bt%3D0%7D%5EH%7BR%5Cleft%28s_t%2Cu_t%5Cright%29%7D+%5C%5D)，表示轨迹 ![[公式]](https://www.zhihu.com/equation?tex=%5Ctau)的回报，![[公式]](https://www.zhihu.com/equation?tex=P%5Cleft%28%5Ctau+%3B%5Ctheta%5Cright%29) 表示轨迹 ![[公式]](https://www.zhihu.com/equation?tex=%5Ctau) 出现的概率
+- 用 $\tau$ 表示一组状态-行为序列 $s_0,u_0,\ldots,s_H,u_H$，符号 $R(\tau)=\sum_{t=0}^{H} R\left(s_{t}, u_{t}\right)$ 表示轨迹 $\tau$ 的回报，$P(\tau;\theta)$ 表示轨迹 $\tau$ 出现的概率
 
 - $$
   U(\theta)=E\left(\sum_{t=0}^{H} R\left(s_{t}, u_{t}\right) ; \pi_{\theta}\right)=\sum_{\tau} P(\tau ; \theta) R(\tau)
@@ -96,12 +96,12 @@
 
 ### 形式
 
-- $$
-  \begin{aligned} \nabla_{\theta} J(\theta) &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a)\color{red}v_{t}\right] & & \text { REINFORCE } \\ 
+$$
+\begin{aligned} \nabla_{\theta} J(\theta) &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a)\color{red}v_{t}\right] & & \text { REINFORCE } \\ 
 &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a) \color{red}Q^{w}(s, a)\right] & & \text { Q Actor-Critic } \\ &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a) \color{red}A^{w}(s, a)\right] & & \text { Actor-Critic } \\ 
 &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a) \color{red}\delta\right] & & \text { TD Actor-Critic } \\ 
 &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a) \color{red}\delta e\right] & & \operatorname{TD}(\lambda) \text { Actor-Critic } \end{aligned}
-  $$
+$$
 
 ## 算法
 
