@@ -43,9 +43,9 @@
   \begin{aligned} \nabla_{\theta} U(\theta) & \approx \hat{g}=\frac{1}{m} \sum_{i=1}^{m} \nabla_{\theta} \log P\left(\tau^{(i)} ; \theta\right) R\left(\tau^{(i)}\right) \\ &=\frac{1}{m} \sum_{i=1}^{m} \nabla_{\theta} \log P\left(\tau^{(i)} ; \theta\right)\left(R\left(\tau^{(i)}\right)-b\right) \end{aligned}
   $$
 
-$$
-\begin{aligned} & E\left[\nabla_{\theta} \log P(\tau ; \theta) b\right] \\=& \sum_{\tau} P(\tau ; \theta) \nabla_{\theta} \log P(\tau ; \theta) b \\=& \sum_{\tau} P(\tau ; \theta) \frac{\nabla_{\theta} P(\tau ; \theta) b}{P(\tau ; \theta)} \\=& \sum_{\tau} \nabla_{\theta} P(\tau ; \theta) b \\=& \nabla_{\theta}\left(\sum_{\tau} P(\tau ; \theta) b\right) \\=&\nabla_{\theta} b \\=& 0 \end{aligned}
-$$
+  $$
+  \begin{aligned} & E\left[\nabla_{\theta} \log P(\tau ; \theta) b\right] \\=& \sum_{\tau} P(\tau ; \theta) \nabla_{\theta} \log P(\tau ; \theta) b \\=& \sum_{\tau} P(\tau ; \theta) \frac{\nabla_{\theta} P(\tau ; \theta) b}{P(\tau ; \theta)} \\=& \sum_{\tau} \nabla_{\theta} P(\tau ; \theta) b \\=& \nabla_{\theta}\left(\sum_{\tau} P(\tau ; \theta) b\right) \\=&\nabla_{\theta} b \\=& 0 \end{aligned}
+  $$
 
 - 当前的动作与过去的回报实际上是没有关系的，可以修改回报函数（两种方式）
 
@@ -81,7 +81,7 @@ $$
 
 ### 梯度
 
-![Policy Gradient](pictures\Policy-Gradient.png)
+![Policy Gradient](pictures/Policy-Gradient.png)
 
 $$
 \begin{aligned} \nabla_{\theta} J(\theta) &=\sum_{s \in S} d(s) \sum_{a \in A} \nabla_{\theta} \pi_{\theta}(s, a) R_{s, a} \\ &=\sum_{s \in S} d(s) \sum_{a \in A} \pi_{\theta}(s, a) \nabla_{\theta} \log \pi_{\theta}(s, a) R_{s, a} \\ &=\mathbb{E}_{\pi_{\theta}}\left[\nabla_{\theta} \log \pi_{\theta}(s, a) r\right] \end{aligned}
@@ -89,7 +89,7 @@ $$
 
 ### 策略梯度定理
 
-![Policy Gradient Theorem](pictures\Policy-Gradient-Theorem.png)
+![Policy Gradient Theorem](pictures/Policy-Gradient-Theorem.png)
 
 ### 形式
 
@@ -104,7 +104,7 @@ $$
 
 ### Monte-Carlo Policy Gradient
 
-![Monte-Carlo Policy Gradient](pictures\Monte-Carlo-Policy-Gradient.png)
+![Monte-Carlo Policy Gradient](pictures/Monte-Carlo-Policy-Gradient.png)
 
 ### Action-Value Actor-Critic 
 
@@ -113,13 +113,13 @@ $$
 
 - learn approximations to both policy and value functions 
 
-![Action-Value-Actor-Critic](pictures\Action-Value-Actor-Critic.png)
+![Action-Value-Actor-Critic](pictures/Action-Value-Actor-Critic.png)
 
 ### Reducing Variance Using a Baseline
 
 仅基于状态的基准函数，不改变期望
 
-![Reducing-Variance-Using-a-Baseline](pictures\Reducing-Variance-Using-a-Baseline.png)
+![Reducing-Variance-Using-a-Baseline](pictures/Reducing-Variance-Using-a-Baseline.png)
 
 优势函数记录了在状态s时采取动作a比停留在s状态多出来的价值，是一个增量
 
@@ -127,15 +127,15 @@ $$
 
 ##### Critics at Different Time-Scales 
 
-![Critics-at-Different-Time-Scales](pictures\Critics-at-Different-Time-Scales.png)
+![Critics-at-Different-Time-Scales](pictures/Critics-at-Different-Time-Scales.png)
 
 ##### Actors at Different Time-Scales 
 
-![Actors-at-Different-Time-Scales](pictures\Actors-at-Different-Time-Scales.png)
+![Actors-at-Different-Time-Scales](pictures/Actors-at-Different-Time-Scales.png)
 
 ##### Policy Gradient with Eligibility Traces 
 
-![Policy-Gradient-with-Eligibility-Traces](pictures\Policy-Gradient-with-Eligibility-Traces.png)
+![Policy-Gradient-with-Eligibility-Traces](pictures/Policy-Gradient-with-Eligibility-Traces.png)
 
 ## 参考
 
