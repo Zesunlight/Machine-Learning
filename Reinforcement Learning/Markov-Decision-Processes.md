@@ -137,7 +137,7 @@
   - K 步内都没超过阈值，认为这个序列并不优秀，后面的状态也就不考虑了；nK 步了，依然超过阈值，认为序列还不错，还可以在此基础上加一个奖励
 
 - $$
-   G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\ &=R_{t+1}+\gamma(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots) \\ &=R_{t+1}+\gamma G_{t+1} 
+   G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\ &=R_{t+1}+\gamma(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots) \\ &=R_{t+1}+\gamma G_{t+1} 
   $$
 
 - 目标是找到选取动作的方式使得累计回报最大
@@ -180,7 +180,7 @@
 
 $$
 p(s^{\prime} | s, a) \doteq \operatorname{Pr}\{S_{t}=s^{\prime} | S_{t-1}=s, A_{t-1}=a\}=\sum_{r \in \mathcal{R}} p(s^{\prime}, r | s, a)\\
-p: \mathcal{S} \times \mathcal{S} \times \mathcal{A} arrow[0,1])
+p: \mathcal{S} \times \mathcal{S} \times \mathcal{A} \to [0,1])
 $$
 
 - expected rewards for state-action pairs *立即回报函数 immediate reward function* 
@@ -219,9 +219,11 @@ $$
   $$
   v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s ] = \mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s],\quad \forall s\in \mathcal S
   $$
+  
   $$
   q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s, A_{t}=a]=\mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a] 
   $$
+  
   $$
   v_{\pi}(s)=\sum_{a \in \mathcal A} \pi (a|s) q_{\pi}(s,a)
   $$
@@ -231,7 +233,7 @@ $$
 #### Value Functions with Successor States
 
 $$
-v_{\pi}(s) & \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s] \\ &=\mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1} | S_{t}=s] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p(s^{\prime}, r | s, a)[r+\gamma \mathbb{E}_{\pi}[G_{t+1} | S_{t+1}=s^{\prime}]] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{\pi}(s^{\prime})], \quad \text { for all } s \in \mathcal{S}
+v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s] \\ &=\mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1} | S_{t}=s] \\ =\sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p(s^{\prime}, r | s, a)[r+\gamma \mathbb{E}_{\pi}[G_{t+1} | S_{t+1}=s^{\prime}]] \\ =\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{\pi}(s^{\prime})], \quad \text { for all } s \in \mathcal{S}
 $$
 
 $$
@@ -262,7 +264,6 @@ v_{*}(s) \doteq \max _{\pi} v_{\pi}(s)
 $$
 
 $$
- 
 v_{*}(s) &=\max _{a \in \mathcal{A}(s)} q_{{*}}(s, a) \\ &=\max _{a} \mathbb{E}[G_{t} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma G_{t+1} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma v_{*}(S_{t+1}) | S_{t}=s, A_{t}=a] \\ &=\max _{a} \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{*}(s^{\prime})] 
 $$
 
