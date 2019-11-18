@@ -11,7 +11,7 @@
   与智能体交互的事情，构成了其外部的所有
 - These interact continually, the agent selecting actions and the environment responding to these actions and presenting new situations to the agent.
 - The environment also gives rise to rewards, special numerical values that the agent seeks to maximize over time through its choice of actions.
-- ![The agent–environment interaction in a Markov decision process](pictures\The-agent–environment-interaction-in-a-Markov-decision-process.png)
+- ![The agent–environment interaction in a Markov decision process](pictures/The-agent–environment-interaction-in-a-Markov-decision-process.png)
 - learning to control a system so as to maximize some numerical value which represents a long-term objective
 
 ### 界限
@@ -241,9 +241,9 @@ $$
 - **reward 和 return 都是基于某个状态而言的，都是期望值** （$G_{t}$ 和 $v(s)\ \text{or}\ q(s,a)$ 可以看成一体两面）
 
 #### 图解
-![v(s)-q(sa)](pictures\v(s)-q(sa).png)
+![v(s)-q(sa)](pictures/v(s)-q(sa).png)
 
-![q(sa)-v(s)](pictures\q(sa)-v(s).png)
+![q(sa)-v(s)](pictures/q(sa)-v(s).png)
 
 ###  Optimal Policies and Optimal Value Functions 
 
@@ -268,7 +268,7 @@ $$
 
 #### 图解
 
-![backup-diagram-for-v-q](pictures\backup-diagram-for-v-q.png)
+![backup-diagram-for-v-q](pictures/backup-diagram-for-v-q.png)
 
 - 每一个状态，选择 return 最大的一个动作
 
