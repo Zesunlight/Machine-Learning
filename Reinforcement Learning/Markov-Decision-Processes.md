@@ -137,7 +137,7 @@
   - K 步内都没超过阈值，认为这个序列并不优秀，后面的状态也就不考虑了；nK 步了，依然超过阈值，认为序列还不错，还可以在此基础上加一个奖励
 
 - $$
-   G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\ &=R_{t+1}+\gamma(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots) \\ &=R_{t+1}+\gamma G_{t+1} 
+   G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\ =R_{t+1}+\gamma(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots) \\ =R_{t+1}+\gamma G_{t+1} 
   $$
 
 - 目标是找到选取动作的方式使得累计回报最大
@@ -216,6 +216,7 @@ $$
 - The value function of a state s under a policy $\pi$, denoted $v_{\pi}(s)$, *state-value function for policy $\pi$* 
 
   The value of taking action a in state s under a policy $\pi$, denoted $q_{\pi}(s, a)$, *action-value function for policy $\pi$* 
+  
   $$
   v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s ] = \mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s],\quad \forall s\in \mathcal S
   $$
