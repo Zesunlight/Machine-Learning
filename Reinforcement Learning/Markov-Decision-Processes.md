@@ -155,7 +155,7 @@
 - for particular values of these random variables, $s^{\prime}\in\mathcal S$ and $r\in \mathcal R$, there is a probability of those values occurring at time t, given particular values of the preceding state and action
   只依赖于前一个状态和动作
   $$
-  p\left(s^{\prime}, r | s, a\right) \doteq \operatorname{Pr}\left\{S_{t}=s^{\prime}, R_{t}=r | S_{t-1}=s, A_{t-1}=a\right\}
+  p(s^{\prime}, r | s, a) \doteq \operatorname{Pr}\{S_{t}=s^{\prime}, R_{t}=r | S_{t-1}=s, A_{t-1}=a\}
   $$
 
 - The dynamics function $p : S \times R \times S \times A \to [0, 1]$ is an ordinary deterministic function of four arguments. 
@@ -179,7 +179,7 @@
 - *state-transition probabilities 状态转移概率* 
 
 $$
-p\left(s^{\prime} | s, a\right) \doteq \operatorname{Pr}\left\{S_{t}=s^{\prime} | S_{t-1}=s, A_{t-1}=a\right\}=\sum_{r \in \mathcal{R}} p\left(s^{\prime}, r | s, a\right)\\
+p(s^{\prime} | s, a) \doteq \operatorname{Pr}\{S_{t}=s^{\prime} | S_{t-1}=s, A_{t-1}=a\}=\sum_{r \in \mathcal{R}} p(s^{\prime}, r | s, a)\\
 p: \mathcal{S} \times \mathcal{S} \times \mathcal{A} \rightarrow[0,1])
 $$
 
@@ -217,8 +217,12 @@ $$
 
   The value of taking action a in state s under a policy $\pi$, denoted $q_{\pi}(s, a)$, *action-value function for policy $\pi$* 
   $$
-  v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s \right] = \mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s\right],\quad \forall s\in \mathcal S\\
-  q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a\right] \\
+  v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s \right] = \mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s\right],\quad \forall s\in \mathcal S
+  $$
+  $$
+  q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a\right] 
+  $$
+  $$
   v_{\pi}(s)=\sum_{a \in \mathcal A} \pi (a|s) q_{\pi}(s,a)
   $$
 
@@ -228,13 +232,18 @@ $$
 
 $$
 \begin{aligned} v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right] \\ &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s\right] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \mathbb{E}_{\pi}\left[G_{t+1} | S_{t+1}=s^{\prime}\right]\right] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right], \quad \text { for all } s \in \mathcal{S} 
-\end{aligned} \\
+\end{aligned} 
+$$
+
+$$
 q_{\pi}(s, a)=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma  v_{\pi}(s^{\prime}) \right]=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]
 $$
 
+$$
+v(s)=\mathbb{E}\left[R_{t+1}+ \gamma v\left(S_{t+1}\right) | S_{t}=s\right] 
+$$
 
 $$
-v(s)=\mathbb{E}\left[R_{t+1}+ \gamma v\left(S_{t+1}\right) | S_{t}=s\right] \\
 q(s,a)=\mathbb{E}\left[R_{t+1}+ \gamma q\left(S_{t+1},A_{t+1}\right) | S_{t}=s,A_t=a\right]
 $$
 
@@ -250,15 +259,19 @@ $$
 #### 贪心算法
 
 $$
-\begin{aligned}v_{*}(s) \doteq \max _{\pi} v_{\pi}(s) \end{aligned}\\
+\begin{aligned}v_{*}(s) \doteq \max _{\pi} v_{\pi}(s) \end{aligned}
+$$
 
+$$
 \begin{aligned} 
 v_{*}(s) &=\max _{a \in \mathcal{A}(s)} q_{{*}}(s, a) \\ &=\max _{a} \mathbb{E}\left[G_{t} | S_{t}=s, A_{t}=a\right] \\ &=\max _{a} \mathbb{E}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s, A_{t}=a\right] \\ &=\max _{a} \mathbb{E}\left[R_{t+1}+\gamma v_{*}\left(S_{t+1}\right) | S_{t}=s, A_{t}=a\right] \\ &=\max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{*}\left(s^{\prime}\right)\right] \end{aligned}
 $$
 
 $$
-q_{*}(s,a) \doteq \max _{\pi} q_{\pi}(s,a) \\
+q_{*}(s,a) \doteq \max _{\pi} q_{\pi}(s,a)
+$$
 
+$$
 \begin{aligned} q_{*}(s, a) &=\mathbb{E}\left[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}\left(S_{t+1}, a^{\prime}\right) | S_{t}=s, A_{t}=a\right] \\ &=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} q_{*}\left(s^{\prime}, a^{\prime}\right)\right] \end{aligned}
 $$
 
