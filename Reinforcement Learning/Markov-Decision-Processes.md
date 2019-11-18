@@ -137,7 +137,7 @@
   - K 步内都没超过阈值，认为这个序列并不优秀，后面的状态也就不考虑了；nK 步了，依然超过阈值，认为序列还不错，还可以在此基础上加一个奖励
 
 - $$
-  \begin{aligned} G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\ &=R_{t+1}+\gamma\left(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots\right) \\ &=R_{t+1}+\gamma G_{t+1} \end{aligned}
+   G_{t} & \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots \\ &=R_{t+1}+\gamma(R_{t+2}+\gamma R_{t+3}+\gamma^{2} R_{t+4}+\cdots) \\ &=R_{t+1}+\gamma G_{t+1} 
   $$
 
 - 目标是找到选取动作的方式使得累计回报最大
@@ -163,7 +163,7 @@
 
 - 条件概率
   $$
-  \sum_{s^{\prime} \in \mathcal{S}} \sum_{r \in \mathcal{R}} p\left(s^{\prime}, r | s, a\right)=1, \text { for all } s \in \mathcal{S}, a \in \mathcal{A}(s)
+  \sum_{s^{\prime} \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s^{\prime}, r | s, a)=1, \text { for all } s \in \mathcal{S}, a \in \mathcal{A}(s)
   $$
 
 - In a Markov decision process, the probabilities given by p completely characterize the environment’s dynamics. 
@@ -180,18 +180,18 @@
 
 $$
 p(s^{\prime} | s, a) \doteq \operatorname{Pr}\{S_{t}=s^{\prime} | S_{t-1}=s, A_{t-1}=a\}=\sum_{r \in \mathcal{R}} p(s^{\prime}, r | s, a)\\
-p: \mathcal{S} \times \mathcal{S} \times \mathcal{A} \rightarrow[0,1])
+p: \mathcal{S} \times \mathcal{S} \times \mathcal{A} arrow[0,1])
 $$
 
 - expected rewards for state-action pairs *立即回报函数 immediate reward function* 
   $$
-  r(s, a) \doteq \mathbb{E}\left[R_{t} | S_{t-1}=s, A_{t-1}=a\right]=\sum_{r \in \mathcal{R}} r \sum_{s^{\prime} \in \mathcal{S}} p\left(s^{\prime}, r | s, a\right)\\
+  r(s, a) \doteq \mathbb{E}[R_{t} | S_{t-1}=s, A_{t-1}=a]=\sum_{r \in \mathcal{R}} r \sum_{s^{\prime} \in \mathcal{S}} p(s^{\prime}, r | s, a)\\
   r:\mathcal S \times \mathcal A \to \mathbb R
   $$
 
 - expected rewards for state-action-next state triples
   $$
-  r\left(s, a, s^{\prime}\right) \doteq \mathbb{E}\left[R_{t} | S_{t-1}=s, A_{t-1}=a, S_{t}=s^{\prime}\right]=\sum_{r \in \mathcal{R}} r \frac{p\left(s^{\prime}, r | s, a\right)}{p\left(s^{\prime} | s, a\right)}\\
+  r(s, a, s^{\prime}) \doteq \mathbb{E}[R_{t} | S_{t-1}=s, A_{t-1}=a, S_{t}=s^{\prime}]=\sum_{r \in \mathcal{R}} r \frac{p(s^{\prime}, r | s, a)}{p(s^{\prime} | s, a)}\\
   r:\mathcal S \times \mathcal A \times \mathcal S \to \mathbb R
   $$
 
@@ -217,10 +217,10 @@ $$
 
   The value of taking action a in state s under a policy $\pi$, denoted $q_{\pi}(s, a)$, *action-value function for policy $\pi$* 
   $$
-  v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s \right] = \mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s\right],\quad \forall s\in \mathcal S
+  v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s ] = \mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s],\quad \forall s\in \mathcal S
   $$
   $$
-  q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s, A_{t}=a\right]=\mathbb{E}_{\pi}\left[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a\right] 
+  q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s, A_{t}=a]=\mathbb{E}_{\pi}[\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1} | S_{t}=s, A_{t}=a] 
   $$
   $$
   v_{\pi}(s)=\sum_{a \in \mathcal A} \pi (a|s) q_{\pi}(s,a)
@@ -231,20 +231,19 @@ $$
 #### Value Functions with Successor States
 
 $$
-\begin{aligned} v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right] \\ &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s\right] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \mathbb{E}_{\pi}\left[G_{t+1} | S_{t+1}=s^{\prime}\right]\right] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right], \quad \text { for all } s \in \mathcal{S} 
-\end{aligned} 
+v_{\pi}(s) & \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s] \\ &=\mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1} | S_{t}=s] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p(s^{\prime}, r | s, a)[r+\gamma \mathbb{E}_{\pi}[G_{t+1} | S_{t+1}=s^{\prime}]] \\ &=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{\pi}(s^{\prime})], \quad \text { for all } s \in \mathcal{S}
 $$
 
 $$
-q_{\pi}(s, a)=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma  v_{\pi}(s^{\prime}) \right]=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]
+q_{\pi}(s, a)=\sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma  v_{\pi}(s^{\prime}) ]=\sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma \sum_{a^{\prime}} \pi(a^{\prime} | s^{\prime}) q_{\pi}(s^{\prime}, a^{\prime})]
 $$
 
 $$
-v(s)=\mathbb{E}\left[R_{t+1}+ \gamma v\left(S_{t+1}\right) | S_{t}=s\right] 
+v(s)=\mathbb{E}[R_{t+1}+ \gamma v(S_{t+1}) | S_{t}=s] 
 $$
 
 $$
-q(s,a)=\mathbb{E}\left[R_{t+1}+ \gamma q\left(S_{t+1},A_{t+1}\right) | S_{t}=s,A_t=a\right]
+q(s,a)=\mathbb{E}[R_{t+1}+ \gamma q(S_{t+1},A_{t+1}) | S_{t}=s,A_t=a]
 $$
 
 - **reward 和 return 都是基于某个状态而言的，都是期望值** （$G_{t}$ 和 $v(s)\ \text{or}\ q(s,a)$ 可以看成一体两面）
@@ -259,12 +258,12 @@ $$
 #### 贪心算法
 
 $$
-\begin{aligned}v_{*}(s) \doteq \max _{\pi} v_{\pi}(s) \end{aligned}
+v_{*}(s) \doteq \max _{\pi} v_{\pi}(s) 
 $$
 
 $$
-\begin{aligned} 
-v_{*}(s) &=\max _{a \in \mathcal{A}(s)} q_{{*}}(s, a) \\ &=\max _{a} \mathbb{E}\left[G_{t} | S_{t}=s, A_{t}=a\right] \\ &=\max _{a} \mathbb{E}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s, A_{t}=a\right] \\ &=\max _{a} \mathbb{E}\left[R_{t+1}+\gamma v_{*}\left(S_{t+1}\right) | S_{t}=s, A_{t}=a\right] \\ &=\max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{*}\left(s^{\prime}\right)\right] \end{aligned}
+ 
+v_{*}(s) &=\max _{a \in \mathcal{A}(s)} q_{{*}}(s, a) \\ &=\max _{a} \mathbb{E}[G_{t} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma G_{t+1} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma v_{*}(S_{t+1}) | S_{t}=s, A_{t}=a] \\ &=\max _{a} \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{*}(s^{\prime})] 
 $$
 
 $$
@@ -272,11 +271,11 @@ q_{*}(s,a) \doteq \max _{\pi} q_{\pi}(s,a)
 $$
 
 $$
-\begin{aligned} q_{*}(s, a) &=\mathbb{E}\left[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}\left(S_{t+1}, a^{\prime}\right) | S_{t}=s, A_{t}=a\right] \\ &=\sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} q_{*}\left(s^{\prime}, a^{\prime}\right)\right] \end{aligned}
+ q_{*}(s, a) &=\mathbb{E}[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}(S_{t+1}, a^{\prime}) | S_{t}=s, A_{t}=a] \\ &=\sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma \max _{a^{\prime}} q_{*}(s^{\prime}, a^{\prime})] 
 $$
 
 $$
-q_{*}(s, a)=\mathbb{E}\left[R_{t+1}+\gamma v_{*}\left(S_{t+1}\right) | S_{t}=s, A_{t}=a\right]
+q_{*}(s, a)=\mathbb{E}[R_{t+1}+\gamma v_{*}(S_{t+1}) | S_{t}=s, A_{t}=a]
 $$
 
 #### 图解
