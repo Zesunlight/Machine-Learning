@@ -27,7 +27,9 @@
   $$
 
 - $$
+  \begin{aligned}
   \nabla_{\theta} U(\theta)&=\nabla_{\theta} \sum_{\tau} P(\tau ; \theta) R(\tau) \\ &=\sum_{\tau} \nabla_{\theta} P(\tau ; \theta) R(\tau) \\&=\sum_{\tau} \frac{P(\tau ; \theta)}{P(\tau ; \theta)} \nabla_{\theta} P(\tau ; \theta) R(\tau) \\ &=\sum_{\tau} P(\tau ; \theta) \frac{\nabla_{\theta} P(\tau ; \theta) R(\tau)}{P(\tau ; \theta)} \\ &=\sum_{\tau} P(\tau ; \theta) \nabla_{\theta} \log P(\tau ; \theta) R(\tau)
+  \end{aligned}
   $$
   
 - 当利用当前策略 $\pi_\theta$ 采样m条轨迹后，可以利用这m条轨迹的经验平均对策略梯度进行逼近：
@@ -36,18 +38,20 @@
   $$
 
 - $$
+  \begin{aligned}
   \nabla_{\theta} \log P\left(\tau^{(i)} ; \theta\right) &=\nabla_{\theta} \log \left[\prod_{t=0}^{H} P\left(s_{t+1}^{(i)} | s_{t}^{(i)}, u_{t}^{(i)}\right) \cdot \pi_{\theta}\left(u_{t}^{(i)} | s_{t}^{(i)}\right)\right] \\&=\nabla_{\theta}\left[\sum_{t=0}^{H} \log P\left(s_{t+1}^{(i)} | s_{t}^{(i)}, u_{t}^{(i)}\right)+\sum_{t=0}^{H} \log \pi_{\theta}\left(u_{t}^{(i)} | s_{t}^{(i)}\right)\right] \\ &= \nabla_{\theta}\left[\sum_{t=0}^{H} \log \pi_{\theta}\left(u_{t}^{(i)} | s_{t}^{(i)}\right)\right] \\ &=\sum_{t=0}^{H} \nabla_{\theta} \log \pi_{\theta}\left(u_{t}^{(i)} | s_{t}^{(i)}\right)
+\end{aligned}
   $$
-
+  
 - 当回报中引入常数b时，策略梯度不变
   $$
   \begin{aligned} \nabla_{\theta} U(\theta) & \approx \hat{g}=\frac{1}{m} \sum_{i=1}^{m} \nabla_{\theta} \log P\left(\tau^{(i)} ; \theta\right) R\left(\tau^{(i)}\right) \\ &=\frac{1}{m} \sum_{i=1}^{m} \nabla_{\theta} \log P\left(\tau^{(i)} ; \theta\right)\left(R\left(\tau^{(i)}\right)-b\right) \end{aligned}
   $$
 
 
-  $$
+$$
   \begin{aligned} & E\left[\nabla_{\theta} \log P(\tau ; \theta) b\right] \\ &= \sum_{\tau} P(\tau ; \theta) \nabla_{\theta} \log P(\tau ; \theta) b \\ &= \sum_{\tau} P(\tau ; \theta) \frac{\nabla_{\theta} P(\tau ; \theta) b}{P(\tau ; \theta)} \\ &= \sum_{\tau} \nabla_{\theta} P(\tau ; \theta) b \\ &= \nabla_{\theta}\left(\sum_{\tau} P(\tau ; \theta) b\right) \\ &=\nabla_{\theta} b \\ &= 0 \end{aligned}
-  $$
+$$
 
 - 当前的动作与过去的回报实际上是没有关系的，可以修改回报函数（两种方式）
 

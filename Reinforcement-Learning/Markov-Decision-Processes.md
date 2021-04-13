@@ -234,7 +234,9 @@ $$
 #### Value Functions with Successor States
 
 $$
+\begin{aligned}
 v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_{t} | S_{t}=s] \\ &=\mathbb{E}_{\pi}[R_{t+1}+\gamma G_{t+1} | S_{t}=s] \\ =\sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p(s^{\prime}, r | s, a)[r+\gamma \mathbb{E}_{\pi}[G_{t+1} | S_{t+1}=s^{\prime}]] \\ =\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{\pi}(s^{\prime})], \quad \text { for all } s \in \mathcal{S}
+\end{aligned}
 $$
 
 $$
@@ -265,7 +267,9 @@ v_{*}(s) \doteq \max _{\pi} v_{\pi}(s)
 $$
 
 $$
-v_{*}(s) &=\max _{a \in \mathcal{A}(s)} q_{{*}}(s, a) \\ &=\max _{a} \mathbb{E}[G_{t} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma G_{t+1} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma v_{*}(S_{t+1}) | S_{t}=s, A_{t}=a] \\ &=\max _{a} \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{*}(s^{\prime})] 
+\begin{aligned}
+v_{*}(s) &=\max _{a \in \mathcal{A}(s)} q_{{*}}(s, a) \\ &=\max _{a} \mathbb{E}[G_{t} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma G_{t+1} | S_{t}=s, A_{t}=a] \\ &=\max _{a} \mathbb{E}[R_{t+1}+\gamma v_{*}(S_{t+1}) | S_{t}=s, A_{t}=a] \\ &=\max _{a} \sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma v_{*}(s^{\prime})]
+\end{aligned}
 $$
 
 $$
@@ -273,7 +277,9 @@ q_{*}(s,a) \doteq \max _{\pi} q_{\pi}(s,a)
 $$
 
 $$
- q_{*}(s, a) &=\mathbb{E}[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}(S_{t+1}, a^{\prime}) | S_{t}=s, A_{t}=a] \\ &=\sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma \max _{a^{\prime}} q_{*}(s^{\prime}, a^{\prime})] 
+\begin{aligned}
+q_{*}(s, a) &=\mathbb{E}[R_{t+1}+\gamma \max _{a^{\prime}} q_{*}(S_{t+1}, a^{\prime}) | S_{t}=s, A_{t}=a] \\ &=\sum_{s^{\prime}, r} p(s^{\prime}, r | s, a)[r+\gamma \max _{a^{\prime}} q_{*}(s^{\prime}, a^{\prime})]
+\end{aligned}
 $$
 
 $$
